@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = trim($_POST['address']);
     $email = trim($_POST['email']);
 
-    // Validation
+
     if (!ctype_upper($first_name[0]) || preg_match('/[^a-zA-Z\s.\-]/', $first_name)) {
         echo json_encode(['error' => 'Invalid first name format']);
         exit();
@@ -168,12 +168,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script>
         document.getElementById('edit-profile-form').addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault(); 
 
             let formData = new FormData(this);
 
             let xhttp = new XMLHttpRequest();
-            xhttp.open('POST', '', true); // Send request to the same file (edit.php)
+            xhttp.open('POST', '', true); 
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     let response = JSON.parse(this.responseText);
