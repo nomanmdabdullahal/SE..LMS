@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
 
     
     if (!empty($email)) {
-        // Delete user by email
+        
         $deleted_rows = deleteUserByEmail($email);
 
         if ($deleted_rows > 0) {
