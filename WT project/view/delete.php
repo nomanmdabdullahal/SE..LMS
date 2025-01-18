@@ -177,7 +177,7 @@ $users = fetchAllUsers();
                 },
                 body: `email=${encodeURIComponent(email)}`,
             })
-            .then(response => response.json())  // Parse JSON response
+            .then(response => response.json())  
             .then(data => {
                 if (data.success) {
                     responseMsg.className = 'success';
