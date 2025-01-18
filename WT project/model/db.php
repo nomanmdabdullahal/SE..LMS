@@ -68,7 +68,6 @@ function getUserById($user_id, $conn) {
     return mysqli_fetch_assoc($result);
 }
 
-//password by id 
  
 function getUserPasswordById($id) {
     global $conn;
@@ -80,7 +79,7 @@ function getUserPasswordById($id) {
 }
 
 
- //update the user password by id
+ 
  
 function updateUserPassword($id, $new_password) {
     global $conn;
@@ -117,7 +116,7 @@ function fetchPasswordByEmail($email, $conn) {
     return $result->fetch_assoc()['password'] ?? null;
 }
 
-// Function to delete a user by email
+
 function deleteUsersByEmail($email, $conn) {
     $query = "DELETE FROM users WHERE email = ?";
     $stmt = $conn->prepare($query);
@@ -135,7 +134,7 @@ function getUserDetails($user_id, $conn) {
     return $result->fetch_assoc();
 }
 
-// Update user profile
+// ##edit profile
 function updateUserProfile($user_id, $first_name, $last_name, $phone_number, $address, $email, $conn) {
     $query = "UPDATE users SET first_name = ?, last_name = ?, phone_number = ?, address = ?, email = ? WHERE id = ?";
     $stmt = $conn->prepare($query);
