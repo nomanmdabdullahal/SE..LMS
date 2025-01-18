@@ -2,25 +2,24 @@
 session_start();
 require_once '../model/db.php';
 
-// Check if user is logged in and is an admin (user_type check)
+
 if (!isset($_SESSION['user_type'])) {
     header("Location: ../view/login.php");
     exit();
 }
 
-// Handle AJAX delete request
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
     $email = trim($_POST['email']);
     $response = [];
 
-    // Validate email
+    
     if (!empty($email)) {
         // Delete user by email
         $deleted_rows = deleteUserByEmail($email);
 
         if ($deleted_rows > 0) {
             $response['success'] = "Account deleted successfully!";
-            $response['email'] = $email; // Return the email to identify the row to remove
+            $response['email'] = $email; 
         } else {
             $response['error'] = "No account found with this email.";
         }
@@ -28,13 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
         $response['error'] = "Please enter a valid email address.";
     }
 
-    // Return JSON response
+    
     header('Content-Type: application/json');
     echo json_encode($response);
     exit();
 }
 
-// Fetch all users from the database
+
 $users = fetchAllUsers();
 ?>
 
@@ -99,13 +98,13 @@ $users = fetchAllUsers();
         #response-msg {
             margin-top: 15px;
             font-size: 16px;
-            color: black; /* Default text color */
-            border: none; /* Removes any borders */
-            padding: 0; /* Removes padding */
-            margin: 0; /* Removes additional spacing */
-            background: none; /* Removes background color */
-            display: inline-block; /* Makes it appear inline */
-            width: auto; /* Ensures it doesn't take unnecessary space */
+            color: black; 
+            border: none; 
+            padding: 0;
+            margin: 0; 
+            background: none; 
+            display: inline-block; 
+            width: auto; 
         }
         #response-msg.success {
             color: green;
@@ -161,16 +160,16 @@ $users = fetchAllUsers();
 
     <script>
         document.getElementById('delete-form').addEventListener('submit', function(e) {
-            e.preventDefault();  // Prevent form submission
+            e.preventDefault();  
 
-            const email = document.getElementById('email').value;  // Get email value
-            const responseMsg = document.getElementById('response-msg');  // Response message div
+            const email = document.getElementById('email').value;  
+            const responseMsg = document.getElementById('response-msg');  
 
-            // Clear previous messages
+            
             responseMsg.textContent = '';
             responseMsg.className = '';
 
-            // Perform AJAX request
+            
             fetch('delete.php', {
                 method: 'POST',
                 headers: {
@@ -184,7 +183,7 @@ $users = fetchAllUsers();
                     responseMsg.className = 'success';
                     responseMsg.textContent = data.success;
 
-                    // Dynamically remove the row from the table
+                    
                     const row = document.querySelector(`tr[data-email="${email}"]`);
                     if (row) {
                         row.remove();
