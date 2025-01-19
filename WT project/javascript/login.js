@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.querySelector("#loginForm");
+    
+    const loginForm = document.querySelector("form[action='../controller/logincheck.php']");
 
+    
     if (loginForm) {
+        
         loginForm.addEventListener("submit", function (event) {
+        
             const email = document.getElementById("email").value.trim();
+            
             const password = document.getElementById("password").value;
 
+            
             let errors = [];
 
             
@@ -18,10 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 errors.push("Password must be at least 8 characters long.");
             }
 
-
+            
             if (errors.length > 0) {
-                event.preventDefault();
-                alert(errors.join("\n"));
+                event.preventDefault(); 
+                alert(errors.join("\n")); 
             }
         });
     }
