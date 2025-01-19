@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once '../model/db.php';
+require_once '../model/db.php'; 
+
 
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['error' => 'User not logged in']);
@@ -8,6 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+
+
 $user = getUserDetails($user_id, $conn);
 
 if (!$user) {
@@ -22,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = trim($_POST['address']);
     $email = trim($_POST['email']);
 
-
+    
     if (!ctype_upper($first_name[0]) || preg_match('/[^a-zA-Z\s.\-]/', $first_name)) {
         echo json_encode(['error' => 'Invalid first name format']);
         exit();
@@ -43,16 +46,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    
     if (updateUserProfile($user_id, $first_name, $last_name, $phone_number, $address, $email, $conn)) {
         echo json_encode(['success' => 'Profile updated successfully']);
     } else {
         echo json_encode(['error' => 'Error updating profile. Please try again later']);
     }
+    exit();
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Edit Profile</title>
     <link rel="icon" href="../image/r1.png" type="image/gif/png">
